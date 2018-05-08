@@ -16,6 +16,7 @@
     "chrome-trace-event": "^1.0.0",
     "enhanced-resolve": "^4.1.0",
     "eslint-scope": "^4.0.0",
+    "json-schema-to-typescript": "^5.7.0",
     "json-parse-better-errors": "^1.0.2",
     "loader-runner": "^2.3.0",
     "loader-utils": "^1.1.0",
@@ -99,7 +100,8 @@
     "hot/",
     "web_modules/",
     "schemas/",
-    "SECURITY.md"
+    "SECURITY.md",
+    ".prettierrc.json"
   ],
   "scripts": {
     "setup": "node ./setup/setup.js",
