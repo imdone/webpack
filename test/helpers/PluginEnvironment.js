@@ -18,7 +18,7 @@ module.exports = function PluginEnvironment() {
 		const hooks = new Map();
 		return {
 			plugin: addEvent,
-			// TODO: Figure out a better way of doing this
+			// TODO: Figure out a better way of doing this id:42
 			// In the meanwhile, `hooks` is a `Proxy` which creates fake hooks
 			// on demand. Instead of creating a dummy object with a few `Hook`
 			// method, a custom `Hook` class could be used.

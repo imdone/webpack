@@ -1991,7 +1991,7 @@ function HTML(runner, root) {
   runner.on('test end', function(test){
     window.scrollTo(0, document.body.scrollHeight);
 
-    // TODO: add to stats
+    // TODO: add to stats id:115
     var percent = stats.tests / total * 100 | 0;
     if (progress) progress.update(percent).draw(ctx);
 
@@ -2028,7 +2028,7 @@ function HTML(runner, root) {
     }
 
     // toggle code
-    // TODO: defer
+    // TODO: defer id:65
     if (!test.pending) {
       var h2 = el.getElementsByTagName('h2')[0];
 
