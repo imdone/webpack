@@ -11,7 +11,8 @@
         }
       },
       "additionalProperties": true,
-      "required": ["apply"]
+      "required": ["apply"],
+      "tsType": "(compiler: import('../lib/Compiler')) => void"
     },
     "common.pluginObject": {
       "description": "Plugin instance",
@@ -19,7 +20,8 @@
       "properties": {
         "apply": {
           "description": "The run point of the plugin, required method.",
-          "instanceof": "Function"
+          "instanceof": "Function",
+          "tsType": "(compiler: import('../lib/Compiler')) => void"
         }
       },
       "additionalProperties": true,
@@ -107,7 +109,7 @@
         }
       ]
     },
-    "externals": {
+    "external-item": {
       "anyOf": [
         {
           "description": "An exact matched dependency becomes external. The same string is used as external dependency.",
@@ -141,13 +143,20 @@
         {
           "description": "Every matched dependency becomes external.",
           "instanceof": "RegExp"
+        }
+      ]
+    },
+    "externals": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/external-item"
         },
         {
           "items": {
             "description": "External configuration",
             "anyOf": [
               {
-                "$ref": "#/definitions/externals"
+                "$ref": "#/definitions/external-item"
               }
             ]
           },
@@ -757,7 +766,7 @@
               "description": "Exclude all modules matching any of these conditions",
               "anyOf": [
                 {
-                  "$ref": "#/definitions/ruleSet-condition"
+                  "$ref": "#/definitions/ruleSet-condition-or-conditions"
                 }
               ]
             },
@@ -765,7 +774,7 @@
               "description": "Exclude all modules matching not any of these conditions",
               "anyOf": [
                 {
-                  "$ref": "#/definitions/ruleSet-condition"
+                  "$ref": "#/definitions/ruleSet-condition-or-conditions"
                 }
               ]
             },
@@ -789,7 +798,7 @@
               "description": "Exclude all modules matching any of these conditions",
               "anyOf": [
                 {
-                  "$ref": "#/definitions/ruleSet-condition"
+                  "$ref": "#/definitions/ruleSet-condition-or-conditions"
                 }
               ]
             }
@@ -807,7 +816,19 @@
           }
         ]
       },
-      "type": "array"
+      "type": "array",
+      "tsType": "RuleSetConditionsRecursive"
+    },
+    "ruleSet-condition-or-conditions": {
+      "description": "One or multiple rule conditions",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ruleSet-condition"
+        },
+        {
+          "$ref": "#/definitions/ruleSet-conditions"
+        }
+      ]
     },
     "ruleSet-loader": {
       "minLength": 1,
@@ -834,7 +855,7 @@
           "description": "Shortcut for resource.exclude",
           "allOf": [
             {
-              "$ref": "#/definitions/ruleSet-condition"
+              "$ref": "#/definitions/ruleSet-condition-or-conditions"
             },
             {
               "absolutePath": true
@@ -845,7 +866,7 @@
           "description": "Shortcut for resource.include",
           "allOf": [
             {
-              "$ref": "#/definitions/ruleSet-condition"
+              "$ref": "#/definitions/ruleSet-condition-or-conditions"
             },
             {
               "absolutePath": true
@@ -856,7 +877,7 @@
           "description": "Match the issuer of the module (The module pointing to this module)",
           "allOf": [
             {
-              "$ref": "#/definitions/ruleSet-condition"
+              "$ref": "#/definitions/ruleSet-condition-or-conditions"
             },
             {
               "absolutePath": true
@@ -938,7 +959,7 @@
           "description": "Match the resource path of the module",
           "allOf": [
             {
-              "$ref": "#/definitions/ruleSet-condition"
+              "$ref": "#/definitions/ruleSet-condition-or-conditions"
             },
             {
               "absolutePath": true
@@ -949,7 +970,7 @@
           "description": "Match the resource query of the module",
           "anyOf": [
             {
-              "$ref": "#/definitions/ruleSet-condition"
+              "$ref": "#/definitions/ruleSet-condition-or-conditions"
             }
           ]
         },
@@ -957,7 +978,7 @@
           "description": "Match the child compiler name",
           "anyOf": [
             {
-              "$ref": "#/definitions/ruleSet-condition"
+              "$ref": "#/definitions/ruleSet-condition-or-conditions"
             }
           ]
         },
@@ -973,7 +994,7 @@
           "description": "Shortcut for resource.test",
           "allOf": [
             {
-              "$ref": "#/definitions/ruleSet-condition"
+              "$ref": "#/definitions/ruleSet-condition-or-conditions"
             },
             {
               "absolutePath": true
