@@ -38,7 +38,7 @@ describe("Examples", () => {
 					if (!options.entry) options.entry = "./example.js";
 					if (!options.plugins) options.plugins = [];
 					// To support deprecated loaders
-					// TODO remove in webpack 5
+					// TODO remove in webpack 5 id:110
 					options.plugins.push(
 						new webpack.LoaderOptionsPlugin({
 							options: {}

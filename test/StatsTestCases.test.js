@@ -50,7 +50,7 @@ describe("StatsTestCases", () => {
 				if (options.optimization.minimize === undefined)
 					options.optimization.minimize = false;
 				// To support deprecated loaders
-				// TODO remove in webpack 5
+				// TODO remove in webpack 5 id:41
 				options.plugins.push(
 					new webpack.LoaderOptionsPlugin({
 						options: {}
